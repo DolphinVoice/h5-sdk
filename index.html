@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dolphin AI SOE</title>
+    <meta name="Keywords" content="Dolphin AI SOE" />
+    <meta name="Description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="static/imgs/favicon.ico">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .form-group{
+            margin-right: 15px;
+        }
+        textarea{
+            resize: none;
+        }
+        .evalate-btn button{
+            margin: 12px 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+<div class="row" style="display: flex;">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-8">
+        <p id="score"> </p>
+        <form id="coreMode" class="form-inline" style="margin-top:10px">
+            <span>評価タイプ：</span>
+            <div class="form-group">
+                <label><input id="realTime" type="radio" name='coreMode' value="0" checked="checked">リアルタイム録音</label>
+            </div>
+            <div class="form-group">
+                <label><input id="upload" type="radio" name='coreMode' value="1">ファイルアップロード</label>
+            </div>
+        </form>
+
+        <form id="coreType" class="form-inline">
+            <span>評価問題タイプ：</span>
+            <div class="form-group">
+                <label><input id="rphoneme" type="radio" name='coreType' value="phoneme" checked="checked">音素</label>
+            </div>
+            <div class="form-group">
+                <label><input id="rword" type="radio" name='coreType' value="word">英単語</label>
+            </div>
+            <div class="form-group">
+                <label><input id="rsentence" type="radio" name='coreType' value="sentence">英文</label>
+            </div>
+            <div class="form-group">
+                <label><input id="rchapter" type="radio" name='coreType' value="chapter">英語段落</label>
+            </div>
+        </form>
+
+        <form>
+            <div class="form-group">
+                <span>評価内容：</span>
+                <textarea class="form-control" style="width:100%; height:150px; margin:10px 0 0 0;" id="eng-txt"></textarea>
+            </div>
+        </form>
+        <form class="filesBox" style="display: none;"><input id="file" type="file" name="file" accept=".mp3,.wav,.pcm"/></form>
+        <div class="evalate-btn">
+            <button id="linkSocket" type="button" class="btn btn-default noFile">
+                <span class="glyphicon glyphicon-record" aria-hidden="true" title="録音開始"></span>
+            </button>
+            <button id="wsStop" type="button" class="btn btn-default noFile" disabled>
+                <span class="glyphicon glyphicon-pause" aria-hidden="true" title="録音停止"></span>
+            </button>
+            <button id="startHTTP" type="button" class="btn btn-default filesBox" style="display: none;">
+                <span class="glyphicon" aria-hidden="true" title="評価開始">評価開始</span>
+            </button>
+            <button id="play" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-repeat" aria-hidden="true" title="音声再生">再生</span>
+            </button>
+            <button id="pause" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-repeat" aria-hidden="true" title="再生一時停止">一時停止</span>
+            </button>
+        </div>
+
+        <div id="module" style="margin-top: 15px;">
+            <p class="errorBox" style="display: none;"></p>
+            <p>得点：<span id='point'></span></p>
+            <p>満点：<span id='totalPoint'></span></p>
+            <p>ダウンロードURL：<span id='audioUrl'></span></p>
+            <p id='level'>詳細スコア：
+                <span style="color:#00EC00;">優</span>
+                <span style="color:#00E3EE;">良</span>
+                <span style="color:#5B5B5B;">可</span>
+                <span style="color:#FF5151;">不可</span></p>
+            <p id='grade' contenteditable="true" style="border:none; outline: none;"></p>
+        </div>
+        <div>
+            <span>評価原始結果</span>
+            <textarea class="form-control" style="width:100%; height:400px; margin-top:10px" id="result"> </textarea>
+        </div>
+    </div>
+    <div class="col-xs-3"></div>
+</div>
+<script type="text/javascript" src="static/jquery.min.js"></script>
+<script type="text/javascript" src="static/recorder/recorder.min.js"></script>
+<!-- SDKコアファイルの読み込み -->
+<script type="text/javascript" src="sdk/soeEngine.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

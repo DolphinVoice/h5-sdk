@@ -1,0 +1,2 @@
+Fill in appId and appSecret in /js/main.js to run the demo project (index.html)
+Please find appId and appSecret in the "Account Information.txt" document
